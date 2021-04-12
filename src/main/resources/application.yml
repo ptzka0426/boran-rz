@@ -1,0 +1,54 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    #    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://81.70.180.73:3306/boran?characterEncoding=utf-8
+    username: boran
+    password: boran123
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+  servlet:
+    multipart:
+      max-file-size: 1050MB
+      max-request-size: 1050MB
+  #Redis数据库
+  redis:
+    database: 0
+    host: 81.70.180.73
+    port: 6379
+    password: 12356
+    timeout: 10s
+    jedis:
+      pool:
+        max-active: 32
+        max-wait: 300ms
+        max-idle: 16
+        min-idle: 8
+    #    cluster:
+    #      nodes:
+    #        - 192.168.174.128:6379
+    #        - 192.168.174.128:6380
+    #        - 192.168.174.128:6381
+    #哨兵
+#    sentinel:
+#      master: mymaster
+#      nodes:
+#        - 192.168.174.128:26379
+mybatis-plus:
+  mapper-locations: classpath:Mapper/*.xml  #mybatis指定数据库xml文件
+  typeAliasesPackage: com.boranrz.Entity      #指定实体类
+  configuration:
+    map-underscore-to-camel-case: false  #关闭驼峰，实体类的 *_*映射
+    auto-mapping-behavior: full
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 0
+      logic-not-delete-value: 1
